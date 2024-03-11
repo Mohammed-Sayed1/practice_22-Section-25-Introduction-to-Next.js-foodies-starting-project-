@@ -7,6 +7,12 @@ import classes from "./page.module.css";
 
 import getMeals from "@/lib/meals";
 
+//* this is how to define metadate for static pages
+export const metadata = {
+  title: "All Meals",
+  description: "Browse the delicious meals shared by our vibrant community.",
+};
+
 /* Converting NextJS component functions to asyncronous functions by adding async keywork is allowed, and this is normally not allowed for React component functions */
 async function Meals() {
   const meals = await getMeals();
@@ -30,7 +36,9 @@ export default function MealsPage() {
         </p>
       </header>
       <main className={classes.main}>
-        <Suspense fallback={<p className={classes.loading}>Fetching meals...</p>}>
+        <Suspense
+          fallback={<p className={classes.loading}>Fetching meals...</p>}
+        >
           <Meals />
         </Suspense>
       </main>

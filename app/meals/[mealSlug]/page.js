@@ -4,6 +4,18 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import classes from "./page.module.css";
 
+//* this is how to define metadate for dynamic pages
+export async function generateMetadata({ params }) {
+  const meal = getMeal(params.mealSlug);
+
+  if (!meal) notFound(); //* in case there is no meals with this path, it will show not found page instaed of showing error page because the return will be undefind
+
+  return {
+    title: meal.title,
+    description: meal.summary,
+  };
+}
+
 export default function MealDetailsPage({ params }) {
   const meal = getMeal(params.mealSlug);
 
